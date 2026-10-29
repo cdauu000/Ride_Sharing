@@ -1,0 +1,1 @@
+"""Rise Sharing modular application."""

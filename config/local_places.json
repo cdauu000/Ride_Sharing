@@ -1,0 +1,16 @@
+[
+  {
+    "id": "local-jacayl-phung-hung-138",
+    "lat": 20.968238,
+    "lon": 105.786924,
+    "label": "Jacayl Hotel – Hà Đông, 138 Phùng Hưng, Phúc La, Hà Nội",
+    "kind": "address",
+    "house_number": "138",
+    "aliases": ["Jacal", "Jacayl", "138 Phùng Hưng"],
+    "excluded_areas": ["hoan kiem", "cau giay", "tran khat chan", "truong cong giai"],
+    "source": "https://vn.trip.com/hotels/hanoi-hotel-detail-114281361/jacayl-hotel/",
+    "precision": "reference",
+    "checked_on": "2026-10-28",
+    "note": "Public listing point, not a surveyed entrance. Other listings disagree; ask passenger to verify the pin. Never derive this coordinate from a nearby house number."
+  }
+]

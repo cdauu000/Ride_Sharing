@@ -1,0 +1,24 @@
+{
+  "name": "ride-sharing-escrow",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Revision 9 research test-credit escrow; no real money",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "node": "hardhat node",
+    "deploy:local": "hardhat run scripts/deploy.cjs --network localhost",
+    "export-abi": "node scripts/export-abi.cjs"
+  },
+  "overrides": { "tmp": "0.2.7" },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "4.2.1",
+    "@nomicfoundation/hardhat-mocha": "4.0.1",
+    "@openzeppelin/contracts": "5.6.1",
+    "chai": "4.5.0",
+    "ethers": "6.17.0",
+    "hardhat": "3.21.1",
+    "solc": "0.8.38"
+  }
+}

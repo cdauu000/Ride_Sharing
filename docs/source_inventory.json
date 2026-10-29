@@ -1,0 +1,1134 @@
+[
+  {
+    "file": "bao_cao_tien_du_an_ride_sharing_revision_9.md",
+    "bytes": 412949,
+    "lines": 3834,
+    "sha256": "edbf0e9923bbcd933dc5586613abd5a3cb7dd7e7f0ae75049b3fffecd6380016",
+    "headings": [
+      {
+        "line": 1,
+        "title": "# BÁO CÁO TIỀN DỰ ÁN — REVISION 9"
+      },
+      {
+        "line": 3,
+        "title": "## XÂY DỰNG NỀN TẢNG ĐẶT XE THÔNG MINH ĐA DỊCH VỤ (XE MÁY, TAXI BAO XE, TAXI GHÉP NỘI ĐÔ VÀ LIÊN TỈNH) VỚI ĐỊNH GIÁ GHÉP CÔNG BẰNG, GỢI Ý CHUYẾN BẰNG AI VÀ KÝ QUỸ BLOCKCHAIN"
+      },
+      {
+        "line": 24,
+        "title": "# TÓM TẮT THAY ĐỔI SO VỚI REVISION 8 (REVISION 8 → REVISION 9)"
+      },
+      {
+        "line": 42,
+        "title": "# MỤC LỤC"
+      },
+      {
+        "line": 150,
+        "title": "# PHẦN 0 — ĐỀ TÀI, MỤC TIÊU NGHIÊN CỨU VÀ PHÂN LOẠI PHẠM VI"
+      },
+      {
+        "line": 152,
+        "title": "# 0.1. ĐỀ TÀI VÀ ĐÓNG GÓP NGHIÊN CỨU – KỸ THUẬT"
+      },
+      {
+        "line": 154,
+        "title": "## Tên đề tài"
+      },
+      {
+        "line": 170,
+        "title": "## Đóng góp dự kiến của đề tài và Ma trận ánh xạ kiểm chứng"
+      },
+      {
+        "line": 192,
+        "title": "# 0.2. PHÂN LOẠI PHẠM VI (MoSCoW) VÀ TỶ TRỌNG CÔNG SỨC"
+      },
+      {
+        "line": 201,
+        "title": "## Hạng mục MUST (Bắt buộc)"
+      },
+      {
+        "line": 220,
+        "title": "## Hạng mục SHOULD (Khuyến nghị thực hiện)"
+      },
+      {
+        "line": 234,
+        "title": "## Hạng mục COULD (Mở rộng tùy chọn)"
+      },
+      {
+        "line": 250,
+        "title": "## Hạng mục WON'T (Không thực hiện trong đồ án này)"
+      },
+      {
+        "line": 263,
+        "title": "## Tỷ trọng phân bổ công sức dự kiến"
+      },
+      {
+        "line": 276,
+        "title": "# PHẦN I — TỔNG QUAN BÀI TOÁN, ĐỐI TƯỢNG SỬ DỤNG VÀ MA TRẬN NĂM DỊCH VỤ"
+      },
+      {
+        "line": 278,
+        "title": "# 1. PHÂN TÍCH BÀI TOÁN THỰC TẾ VÀ NHU CẦU NGƯỜI DÙNG"
+      },
+      {
+        "line": 299,
+        "title": "# 2. MA TRẬN NĂM DỊCH VỤ VÀ QUY TẮC PHÂN LOẠI KHÔNG GIAN – THỜI GIAN"
+      },
+      {
+        "line": 301,
+        "title": "## 2.1. Ma trận năm dịch vụ"
+      },
+      {
+        "line": 313,
+        "title": "## 2.2. Luật thời gian đặt theo từng dịch vụ"
+      },
+      {
+        "line": 326,
+        "title": "## 2.3. Quy tắc tự động xác định Nội đô (`URBAN`) và Liên tỉnh (`INTERCITY`) kèm xử lý biên không gian (`[ACCEPTED]` — D-20, D-50)"
+      },
+      {
+        "line": 356,
+        "title": "## 2.4. Cơ chế tìm xe và điều phối theo từng dịch vụ"
+      },
+      {
+        "line": 367,
+        "title": "# 3. CÁC VAI TRÒ VÀ QUYỀN HẠN TRONG HỆ THỐNG"
+      },
+      {
+        "line": 387,
+        "title": "# 4. LUỒNG NGHIỆP VỤ TỔNG QUÁT THEO TỪNG NHÓM DỊCH VỤ"
+      },
+      {
+        "line": 389,
+        "title": "## 4.1. Luồng đặt xe Nội đô (`BIKE_URBAN`, `CAR_URBAN_PRIVATE`, `CAR_URBAN_POOL`)"
+      },
+      {
+        "line": 427,
+        "title": "## 4.2. Luồng đặt Taxi bao xe liên tỉnh (`CAR_INTERCITY_PRIVATE`)"
+      },
+      {
+        "line": 447,
+        "title": "## 4.3. Luồng đặt Taxi ghép liên tỉnh (`CAR_INTERCITY_POOL`)"
+      },
+      {
+        "line": 482,
+        "title": "# 5. KIẾN TRÚC HỆ THỐNG MỨC CAO (MODULAR MONOLITH)"
+      },
+      {
+        "line": 517,
+        "title": "# PHẦN II — QUY TẮC NGHIỆP VỤ CHUNG, RÀNG BUỘC CỨNG VÀ VÒNG ĐỜI TRẠNG THÁI"
+      },
+      {
+        "line": 519,
+        "title": "# 6. TRIP INTENT VÀ QUY TẮC SUY DIỄN TẬP DỊCH VỤ HỢP LỆ"
+      },
+      {
+        "line": 542,
+        "title": "## Quy tắc suy diễn tập dịch vụ hợp lệ (`allowed_service_codes`)"
+      },
+      {
+        "line": 558,
+        "title": "# 7. HỆ THỐNG 11 RÀNG BUỘC CỨNG (HARD CONSTRAINTS)"
+      },
+      {
+        "line": 619,
+        "title": "# 8. QUY TẮC NGÂN SÁCH (CỨNG VÀ MỀM)"
+      },
+      {
+        "line": 631,
+        "title": "# 9. HỆ THỐNG MÁY TRẠNG THÁI TRỰC GIAO (ORTHOGONAL STATE MACHINES)"
+      },
+      {
+        "line": 637,
+        "title": "## 9.1. Trục 1 — Trạng thái hành trình của Booking (`ride_status`)"
+      },
+      {
+        "line": 657,
+        "title": "## 9.2. Trục 2 — Trạng thái ghép và chốt giá của Booking (`price_status`)"
+      },
+      {
+        "line": 677,
+        "title": "## 9.3. Trục 3 — Trạng thái ký quỹ Blockchain (`escrow_status`)"
+      },
+      {
+        "line": 711,
+        "title": "# PHẦN III — NỘI ĐÔ: XE MÁY, TAXI BAO XE, TAXI GHÉP VÀ MÔ HÌNH ĐỊNH GIÁ – KINH TẾ"
+      },
+      {
+        "line": 713,
+        "title": "# 10. BA DỊCH VỤ NỘI ĐÔ VÀ CƠ CHẾ TOP-K ĐA PHƯƠNG TIỆN"
+      },
+      {
+        "line": 717,
+        "title": "## 10.1. Xe máy nội đô (`BIKE_URBAN`) — Chạy 1:1"
+      },
+      {
+        "line": 736,
+        "title": "## 10.2. Taxi bao xe nội đô (`CAR_URBAN_PRIVATE`)"
+      },
+      {
+        "line": 740,
+        "title": "## 10.3. Taxi ghép nội đô (`CAR_URBAN_POOL`)"
+      },
+      {
+        "line": 744,
+        "title": "## 10.4. Ví dụ đối sánh ba dịch vụ nội đô trên cùng một nhu cầu di chuyển"
+      },
+      {
+        "line": 755,
+        "title": "## 10.5. Cơ chế xếp hạng Top-K đa phương tiện (`[ACCEPTED]` — D-40)"
+      },
+      {
+        "line": 766,
+        "title": "# 11. HÌNH THỨC ĐẶT, CỬA SỔ GHÉP ĐỘNG VÀ ĐIỂM KHÓA GIÁ (`pool_lock_point`)"
+      },
+      {
+        "line": 793,
+        "title": "# 12. GIÁ THAM CHIẾU TAXI BAO XE NỘI ĐÔ VÀ HỆ SỐ GHẾ CHO NHÓM 2 KHÁCH"
+      },
+      {
+        "line": 795,
+        "title": "## 12.1. Công thức giá Taxi bao xe nội đô (`CAR_URBAN_PRIVATE`)"
+      },
+      {
+        "line": 815,
+        "title": "## 12.2. Quy tắc định giá Booking 2 ghế (`seat_count = 2`) trong Taxi ghép nội đô không mâu thuẫn với chính sách giá (`[ACCEPTED]` — D-45b / O-04)"
+      },
+      {
+        "line": 849,
+        "title": "# 13. GIÁ CỦA CẢ CHUYẾN GHÉP (`PlanFare`)"
+      },
+      {
+        "line": 873,
+        "title": "# 14. ĐIỀU KIỆN KHẢ NĂNG CHIA SẺ (SHAREABILITY) VÀ RÀNG BUỘC SINH LỜI TÀI XẾ"
+      },
+      {
+        "line": 877,
+        "title": "## 14.1. Cổng 1 — Điều kiện lợi ích tối thiểu của hành khách (Passenger Shareability Condition — `[ACCEPTED]` D-16)"
+      },
+      {
+        "line": 889,
+        "title": "## 14.2. Cổng 2 — Điều kiện bảo toàn tốc độ sinh lời của tài xế tính trên Khoản Payout thực tế sau làm tròn (`[ACCEPTED]` D-45a / O-03)"
+      },
+      {
+        "line": 920,
+        "title": "# 15. MÔ HÌNH PHÂN BỔ GIÁ GHÉP THEO TRỌNG SỐ BẤT TIỆN CÓ CHẶN HAI ĐẦU (`Floor_i` & `Cap_i`) VÀ CHÈN KHÁCH ĐỘNG"
+      },
+      {
+        "line": 924,
+        "title": "## 15.1. Năm nguyên tắc định giá công bằng đã hiệu chỉnh (`[ACCEPTED]`)"
+      },
+      {
+        "line": 954,
+        "title": "## 15.2. Công thức trọng số bất tiện (có điều chỉnh theo số ghế) và phân bổ cơ sở"
+      },
+      {
+        "line": 981,
+        "title": "## 15.3. Cận trên (`Cap_i`), Cận dưới (`Floor_i`), Điều kiện khả thi và Thuật toán phân bổ hai cận chính xác (`[ACCEPTED]` — D-43)"
+      },
+      {
+        "line": 983,
+        "title": "### 15.3.1. Tại sao bắt buộc phải có cả Cận trên (`Cap_i`) và Cận dưới (`Floor_i`)?"
+      },
+      {
+        "line": 988,
+        "title": "### 15.3.2. Định nghĩa Cận trên hiệu dụng (`EffectiveCap_i`) và Cận dưới (`Floor_i`)"
+      },
+      {
+        "line": 1003,
+        "title": "### 15.3.3. Điều kiện cần và đủ để tồn tại nghiệm (Feasibility Theorem) & Xử lý khi vô nghiệm"
+      },
+      {
+        "line": 1027,
+        "title": "### 15.3.4. Thuật toán phân bổ hai cận chính xác theo Điểm gãy đơn điệu (Exact Piecewise-Linear Breakpoint Water-Filling)"
+      },
+      {
+        "line": 1062,
+        "title": "## 15.4. Quy tắc làm tròn tiền thu của hành khách (`[ACCEPTED]` — D-18)"
+      },
+      {
+        "line": 1070,
+        "title": "## 15.5. Hệ điều kiện đầy đủ và Quy trình định giá khi chèn thêm khách động lúc xe đang chạy (`[ACCEPTED]` — D-44 / O-02)"
+      },
+      {
+        "line": 1127,
+        "title": "# 16. KIỂM CHỨNG ĐỊNH LƯỢNG: VÍ DỤ CHUẨN PHENIKAA → ĐỐNG ĐA VÀ CÁC KỊCH BẢN BIÊN"
+      },
+      {
+        "line": 1131,
+        "title": "## 16.1. Kịch bản chuẩn 2 hành khách: Phenikaa → Đống Đa ghép với La Phù → Nguyễn Trãi"
+      },
+      {
+        "line": 1141,
+        "title": "### Lộ trình kế hoạch ghép (`S_0 → S_1 → S_2 → S_3`):"
+      },
+      {
+        "line": 1155,
+        "title": "### Bước 1 — Tính giá xe đơn tham chiếu ($P_A, P_B$):"
+      },
+      {
+        "line": 1162,
+        "title": "### Bước 2 — Tính `PlanFare` và Kiểm tra 2 cổng Mục 14:"
+      },
+      {
+        "line": 1178,
+        "title": "### Bước 3 — Phân bổ giá theo trọng số bất tiện (Mục 15.2 – 15.4):"
+      },
+      {
+        "line": 1202,
+        "title": "### Bảng tổng hợp kết quả Mục 16.1:"
+      },
+      {
+        "line": 1210,
+        "title": "### So sánh với hai phương pháp chia giá đối chứng (Dùng cho Khảo sát S1 / Giả thuyết H4):"
+      },
+      {
+        "line": 1218,
+        "title": "## 16.2. Kiểm chứng Kịch bản biên #1: Tác dụng của Cận dưới `Floor_i` và Điều kiện khả thi `(F2)` trong chuyến 4 khách chênh lệch lớn"
+      },
+      {
+        "line": 1244,
+        "title": "## 16.3. Kiểm chứng Kịch bản biên #2: Chèn khách C khi khách B đã khóa giá (`pool_lock_point`)"
+      },
+      {
+        "line": 1264,
+        "title": "# 17. THU NHẬP TÀI XẾ KHI GHÉP, QUY TẮC LÀM TRÒN VÀ ĐỐI SOÁT PHẦN LẺ"
+      },
+      {
+        "line": 1266,
+        "title": "## 17.1. Biểu phí hoa hồng và đóng góp Quỹ bảo đảm"
+      },
+      {
+        "line": 1276,
+        "title": "## 17.2. Quy tắc hạch toán hoa hồng trên Tổng tiền thực thu sau làm tròn (`[ACCEPTED]` — D-51 / O-05)"
+      },
+      {
+        "line": 1293,
+        "title": "## 17.3. Bảng đối sánh thu nhập của tài xế (Ví dụ chuẩn Mục 16.1)"
+      },
+      {
+        "line": 1307,
+        "title": "# 18. CƠ CHẾ CHIA SẺ RỦI RO BA BÊN KHI KHÔNG GHÉP ĐƯỢC, CHỐNG PHÁ GHÉP VÀ KHUNG CHÍNH SÁCH HỦY"
+      },
+      {
+        "line": 1309,
+        "title": "## 18.1. Lý do loại bỏ mô hình phụ phí cố định +20% cũ"
+      },
+      {
+        "line": 1316,
+        "title": "## 18.2. Năm nguyên tắc của cơ chế chia sẻ rủi ro ba bên (`[ACCEPTED]` — D-09 đến D-15)"
+      },
+      {
+        "line": 1336,
+        "title": "## 18.3. Công thức tính `Quote_i`, `Gap_i`, `Unmatched_i` và Khoản bù bảo đảm"
+      },
+      {
+        "line": 1357,
+        "title": "## 18.4. Ví dụ định lượng: Khách A đặt Taxi ghép nội đô nhưng không có khách ghép tương thích"
+      },
+      {
+        "line": 1378,
+        "title": "## 18.5. Ma trận quy kết trách nhiệm theo nguyên nhân (`unmatched_cause`)"
+      },
+      {
+        "line": 1388,
+        "title": "## 18.6. Cơ chế chống phá ghép: Nhận chuyến Pool là cam kết tự động nhận khách tương thích"
+      },
+      {
+        "line": 1396,
+        "title": "## 18.7. Khung tham số Chính sách hủy chuyến và Khách không đến (`Cancellation & No-Show Policy` — `[ACCEPTED]` D-52)"
+      },
+      {
+        "line": 1414,
+        "title": "# 19. QUỸ BẢO ĐẢM GHÉP: CÔNG THỨC HÒA VỐN TỔNG QUÁT VÀ PHÂN TÍCH ĐỘ NHẠY"
+      },
+      {
+        "line": 1416,
+        "title": "## 19.1. Nguồn thu, Nguồn chi và Đơn vị thống kê chuẩn (`[ACCEPTED]` — D-19)"
+      },
+      {
+        "line": 1423,
+        "title": "## 19.2. Công thức điều kiện hòa vốn tổng quát theo kỳ vọng quần thể (`p*_booking` vs `p*_ride`)"
+      },
+      {
+        "line": 1445,
+        "title": "### Đối chiếu số học trên ví dụ chuẩn (Khách A = `194.000 đ`, Khách B = `133.000 đ`):"
+      },
+      {
+        "line": 1461,
+        "title": "## 19.3. Phân tích độ nhạy và Đòn bẩy điều hành khi mật độ nhu cầu thấp"
+      },
+      {
+        "line": 1479,
+        "title": "# 20. TRẢI NGHIỆM HIỂN THỊ GIÁ MINH BẠCH VÀ VÒNG ĐỜI GIÁ CỦA BOOKING POOL"
+      },
+      {
+        "line": 1481,
+        "title": "## 20.1. Minh họa giao diện thẻ gợi ý Top-K cho Hành khách A"
+      },
+      {
+        "line": 1499,
+        "title": "## 20.2. Quy tắc tính Giá ghép dự kiến (`Fare_matched_est`) cho hai loại ứng viên Pool (`[ACCEPTED]` — D-50b)"
+      },
+      {
+        "line": 1514,
+        "title": "## 20.3. Vòng đời các trường giá trên bản ghi `Booking`"
+      },
+      {
+        "line": 1527,
+        "title": "# 21. ĐỘNG CƠ KINH TẾ CỦA TÀI XẾ THAY CHO HẠN NGẠCH QUOTA 4:1"
+      },
+      {
+        "line": 1543,
+        "title": "# 22. MÁY TRẠNG THÁI CHI TIẾT CỦA TAXI GHÉP NỘI ĐÔ"
+      },
+      {
+        "line": 1566,
+        "title": "# 23. ĐIỂM ĐÓN GẶP NHAU (MEETING POINTS — COULD C9)"
+      },
+      {
+        "line": 1568,
+        "title": "## 23.1. Động cơ vận trù học"
+      },
+      {
+        "line": 1571,
+        "title": "## 23.2. Thuật toán sinh điểm đón ứng viên"
+      },
+      {
+        "line": 1582,
+        "title": "## 23.3. Bù đắp công sức đi bộ trong công thức giá và Quy tắc an toàn"
+      },
+      {
+        "line": 1588,
+        "title": "# 24. CHUYẾN QUEN LẶP LẠI HẰNG NGÀY (RECURRING TRIPS — COULD C4)"
+      },
+      {
+        "line": 1597,
+        "title": "# PHẦN IV — LIÊN TỈNH: TAXI BAO XE VÀ TAXI GHÉP THEO LỊCH TRÌNH"
+      },
+      {
+        "line": 1599,
+        "title": "# 25. TAXI BAO XE LIÊN TỈNH (`CAR_INTERCITY_PRIVATE`)"
+      },
+      {
+        "line": 1601,
+        "title": "## 25.1. Quy tắc đặt chuyến và Tìm nguồn cung"
+      },
+      {
+        "line": 1609,
+        "title": "## 25.2. Công thức giá Taxi bao xe liên tỉnh"
+      },
+      {
+        "line": 1636,
+        "title": "# 26. TAXI GHÉP LIÊN TỈNH (`CAR_INTERCITY_POOL`): TÀI XẾ ĐĂNG CHUYẾN VÀ QUẢN LÝ NGƯỠNG"
+      },
+      {
+        "line": 1661,
+        "title": "# 27. CÁC MỐC THỜI GIAN VÒNG ĐỜI CHUYẾN GHÉP LIÊN TỈNH (`T−7 NGÀY` → `T`)"
+      },
+      {
+        "line": 1690,
+        "title": "# 28. MÔ HÌNH GIÁ GHẾ SUY NGƯỢC TỪ NGƯỠNG KHỞI HÀNH VÀ CÔNG THỨC PHỤ PHÍ NGOÀI VÙNG (`DoorSurcharge`)"
+      },
+      {
+        "line": 1692,
+        "title": "## 28.1. Công thức Giá ghế tham chiếu (`SeatReference`) (`[ACCEPTED]` — D-38)"
+      },
+      {
+        "line": 1711,
+        "title": "## 28.2. Kiểm chứng định lượng trên tuyến Hà Đông → TP Hưng Yên (`65 km`)"
+      },
+      {
+        "line": 1730,
+        "title": "## 28.3. Công thức tất định tính Phụ phí đón/trả ngoài vùng miễn phí (`DoorSurcharge` — `[ACCEPTED]` P1-02)"
+      },
+      {
+        "line": 1755,
+        "title": "## 28.4. Tổng giá một Booking ghép liên tỉnh"
+      },
+      {
+        "line": 1765,
+        "title": "# 29. QUY TRÌNH CHỐT CHUYẾN TẠI `T−72H`, GÓP THÊM TỰ NGUYỆN (`CONFIRMED_TOPUP`) VÀ XỬ LÝ THIẾU KHÁCH"
+      },
+      {
+        "line": 1811,
+        "title": "## Quy tắc chuẩn hóa hoa hồng khi chuyển sang `CONFIRMED_TOPUP` (`[ACCEPTED]` — P0-04)"
+      },
+      {
+        "line": 1824,
+        "title": "# 30. THUẬT TOÁN VÀ QUY TẮC GỘP CHUYẾN LIÊN TỈNH (`POOL_TRIP_MERGED` — SHOULD S5)"
+      },
+      {
+        "line": 1828,
+        "title": "## 30.1. Điều kiện tương thích để gộp Chuyến nguồn $Y$ (bị gộp) vào Chuyến đích $X$ (nhận khách)"
+      },
+      {
+        "line": 1835,
+        "title": "## 30.2. Quy tắc bảo vệ giá, Ký quỹ và Cửa sổ xác nhận gộp chuyến (`[ACCEPTED]` — P2-02)"
+      },
+      {
+        "line": 1852,
+        "title": "# 31. TỐI ƯU HÓA THỨ TỰ ĐÓN TẠI `T−24H`"
+      },
+      {
+        "line": 1863,
+        "title": "# 32. MÁY TRẠNG THÁI CHI TIẾT CỦA CHUYẾN GHÉP LIÊN TỈNH"
+      },
+      {
+        "line": 1888,
+        "title": "# 33. CÁC MỞ RỘNG LIÊN TỈNH (COULD — C10, C11)"
+      },
+      {
+        "line": 1899,
+        "title": "# PHẦN V — THUẬT TOÁN ĐỊNH TUYẾN, SINH ỨNG VIÊN, GHÉP XE VÀ KIỂM SOÁT ĐỒNG THỜI"
+      },
+      {
+        "line": 1901,
+        "title": "# 34. ĐỊNH TUYẾN OSRM HAI PROFILE, KHÔNG GIAN POSTGIS VÀ CHIẾN LƯỢC GỌI MA TRẬN ĐƠN LẺ"
+      },
+      {
+        "line": 1916,
+        "title": "## Quy tắc tối ưu hiệu năng: Một cuộc gọi ma trận OSRM duy nhất cho mỗi luồng sinh ứng viên (`[ACCEPTED]` — P2-04)"
+      },
+      {
+        "line": 1922,
+        "title": "# 35. THUẬT TOÁN SINH ỨNG VIÊN CHO NĂM DỊCH VỤ VÀ QUY TẮC TRỘN TOP-K"
+      },
+      {
+        "line": 1924,
+        "title": "## 35.1. Xe máy nội đô (`BIKE_URBAN`) và Taxi bao xe nội đô (`CAR_URBAN_PRIVATE`)"
+      },
+      {
+        "line": 1941,
+        "title": "## 35.2. Taxi ghép nội đô (`CAR_URBAN_POOL`)"
+      },
+      {
+        "line": 1967,
+        "title": "## 35.3. Taxi bao xe liên tỉnh (`CAR_INTERCITY_PRIVATE`)"
+      },
+      {
+        "line": 1980,
+        "title": "## 35.4. Taxi ghép liên tỉnh (`CAR_INTERCITY_POOL`)"
+      },
+      {
+        "line": 1995,
+        "title": "## 35.5. Quy tắc gộp và bảo toàn đa dạng trong Top-K (`[ACCEPTED]` — D-40)"
+      },
+      {
+        "line": 2004,
+        "title": "# 36. THUẬT TOÁN CHÈN ĐIỂM ĐÓN/TRẢ ĐỘNG CÓ NHẬN BIẾT TRẠNG THÁI XE ĐANG CHẠY"
+      },
+      {
+        "line": 2079,
+        "title": "# 37. THUẬT TOÁN GHÉP THEO LÔ (BATCH MATCHING CP-SAT TRÊN ĐỒ THỊ RTV RÚT GỌN — SHOULD S4)"
+      },
+      {
+        "line": 2081,
+        "title": "## 37.1. Phạm vi áp dụng trong luồng đặt xe"
+      },
+      {
+        "line": 2086,
+        "title": "## 37.2. Mô hình hóa chính xác bằng Đồ thị Yêu cầu – Chuyến khả thi – Phương tiện (RTV-Graph CP-SAT — `[ACCEPTED]` P1-08)"
+      },
+      {
+        "line": 2135,
+        "title": "# 38. TỔNG HỢP THUẬT TOÁN ĐỊNH GIÁ TOÀN HỆ THỐNG"
+      },
+      {
+        "line": 2177,
+        "title": "# 39. MÔ HÌNH XÁC SUẤT HOÀN THÀNH CHUYẾN (`p_fulfill`) THEO CÂY SỰ KIỆN TUẦN TỰ"
+      },
+      {
+        "line": 2183,
+        "title": "## 39.1. Đối với các dịch vụ có bước gửi Offer (`BIKE_URBAN`, `CAR_URBAN_PRIVATE`, `CAR_URBAN_POOL`, `CAR_INTERCITY_PRIVATE`)"
+      },
+      {
+        "line": 2201,
+        "title": "## 39.2. Đối với dịch vụ Taxi ghép liên tỉnh (`CAR_INTERCITY_POOL`)"
+      },
+      {
+        "line": 2216,
+        "title": "## 39.3. Xử lý khởi đầu lạnh (Cold Start) cho tài xế mới"
+      },
+      {
+        "line": 2224,
+        "title": "# 40. HÀM MỤC TIÊU GỢI Ý BASELINE CÓ GIẢI THÍCH"
+      },
+      {
+        "line": 2259,
+        "title": "# 41. CHUỖI GỬI OFFER (OFFER CASCADE) VÀ CƠ CHẾ GIỮ GHẾ THEO TỪNG BƯỚC (`Per-Offer Seat Hold`)"
+      },
+      {
+        "line": 2263,
+        "title": "## Khắc phục lỗi xung đột TTL giữa `seat_hold` và `offer_cascade` của Revision 8 (`[ACCEPTED]` — P0-05, D-47)"
+      },
+      {
+        "line": 2305,
+        "title": "# 42. KIỂM SOÁT ĐỒNG THỜI BẰNG `plan_version`, KHÓA DÒNG VÀ TÍNH LŨY ĐẲNG (`Idempotency-Key`)"
+      },
+      {
+        "line": 2332,
+        "title": "# PHẦN VI — TRÍ TUỆ NHÂN TẠO (AI/ML), SIMULATOR VÀ PHƯƠNG PHÁP NGHIÊN CỨU"
+      },
+      {
+        "line": 2334,
+        "title": "# 43. VAI TRÒ, RANH GIỚI AN TOÀN VÀ CÁC BÀI TOÁN AI TRONG HỆ THỐNG"
+      },
+      {
+        "line": 2355,
+        "title": "## Tổng hợp các mô hình AI/ML trong kiến trúc"
+      },
+      {
+        "line": 2369,
+        "title": "# 44. MÔ HÌNH LEARNING-TO-RANK (LTR) XẾP HẠNG ĐA PHƯƠNG TIỆN VÀ THIẾT KẾ CHẨN ĐOÁN 2×2"
+      },
+      {
+        "line": 2371,
+        "title": "## 44.1. Định nghĩa Đơn vị truy vấn (Query Group), Ứng viên (Item) và Nhãn huấn luyện (Label)"
+      },
+      {
+        "line": 2376,
+        "title": "## 44.2. Danh mục Đặc trưng đầu vào (Feature Schema — Chỉ dùng thông tin quan sát được tại thời điểm xếp hạng)"
+      },
+      {
+        "line": 2411,
+        "title": "## 44.3. Báo cáo phân tách theo phân khúc (Segmented Evaluation) và Nâng `H9` lên MUST (`[ACCEPTED]` — P0-08)"
+      },
+      {
+        "line": 2418,
+        "title": "## 44.4. Ma trận thực nghiệm Chẩn đoán 2×2 (2×2 Ablation Diagnostic — Giả thuyết H2)"
+      },
+      {
+        "line": 2429,
+        "title": "# 45. MÔ HÌNH DỰ BÁO XÁC SUẤT GHÉP THÀNH CÔNG `P(MATCH)` VÀ QUY TRÌNH HUẤN LUYỆN OUT-OF-FOLD"
+      },
+      {
+        "line": 2431,
+        "title": "## 45.1. Định nghĩa Bài toán và Nhãn quan sát"
+      },
+      {
+        "line": 2437,
+        "title": "## 45.2. Đặc trưng đầu vào (Strictly Point-in-Time tại thời điểm báo giá $t_{\\text{quote}}$)"
+      },
+      {
+        "line": 2454,
+        "title": "## 45.3. Các mốc đối chứng (Baselines), Hiệu chỉnh và Quy trình Out-of-Fold chống rò rỉ (`[ACCEPTED]` — P1-07)"
+      },
+      {
+        "line": 2465,
+        "title": "# 46. MÔ HÌNH HOÀN THÀNH CHUYẾN CÓ ĐIỀU KIỆN VÀ XỬ LÝ RỦI RO CẠNH TRANH (SHOULD S2)"
+      },
+      {
+        "line": 2475,
+        "title": "# 47. HIỆU CHỈNH XÁC SUẤT (CALIBRATION) VÀ CÔNG THỨC ĐIỂM XẾP HẠNG CUỐI CÙNG"
+      },
+      {
+        "line": 2497,
+        "title": "# 48. THIẾT KẾ SIMULATOR 5 DỊCH VỤ TÁI LẬP ĐƯỢC VÀ CƠ CHẾ CHỐNG RÒ RỈ BIẾN ẨN"
+      },
+      {
+        "line": 2501,
+        "title": "## 48.1. Mô hình hành vi lựa chọn ẩn của Hành khách (Heterogeneous Non-Linear Passenger Utility)"
+      },
+      {
+        "line": 2521,
+        "title": "## 48.2. Cơ chế mô phỏng mạng lưới Nội đô (3 dịch vụ)"
+      },
+      {
+        "line": 2527,
+        "title": "## 48.3. Cơ chế mô phỏng mạng lưới Liên tỉnh (2 dịch vụ)"
+      },
+      {
+        "line": 2533,
+        "title": "## 48.4. Cơ chế Tái lập kết quả (Deterministic Reproducibility) và Tường lửa Chống rò rỉ"
+      },
+      {
+        "line": 2539,
+        "title": "# 49. XỬ LÝ KHỞI ĐẦU LẠNH (COLD START) VÀ THIÊN LỆCH VỊ TRÍ HIỂN THỊ (POSITION BIAS)"
+      },
+      {
+        "line": 2546,
+        "title": "# 50. CHATBOT CHUYỂN ĐỔI NGÔN NGỮ TỰ NHIÊN THÀNH TRIP INTENT (COULD C1)"
+      },
+      {
+        "line": 2565,
+        "title": "# 51. DỰ BÁO NHU CẦU TAXI GHÉP THEO KHU VỰC × 15 PHÚT (COULD C2)"
+      },
+      {
+        "line": 2574,
+        "title": "# 52. MÔ HÌNH DỰ BÁO XÁC SUẤT ĐỦ GHẾ LIÊN TỈNH `P(FILL)` (COULD C10)"
+      },
+      {
+        "line": 2582,
+        "title": "# PHẦN VII — KIẾN TRÚC PHẦN MỀM, CƠ SỞ DỮ LIỆU, API, BẢO MẬT, AN TOÀN VÀ PHÁP LÝ"
+      },
+      {
+        "line": 2584,
+        "title": "# 53. NGĂN XẾP CÔNG NGHỆ (TECHNOLOGY STACK)"
+      },
+      {
+        "line": 2601,
+        "title": "# 54. PHÂN RÃ MODULE VÀ RANH GIỚI GIAO TIẾP TRONG MODULAR MONOLITH"
+      },
+      {
+        "line": 2626,
+        "title": "# 55. THIẾT KẾ BẢNG TÁC VỤ ĐỊNH THỜI (`scheduled_jobs`) VÀ CƠ CHẾ THỰC THI AN TOÀN"
+      },
+      {
+        "line": 2660,
+        "title": "# 56. THIẾT KẾ CƠ SỞ DỮ LIỆU, RÀNG BUỘC TOÀN VẸN (CONSTRAINTS) VÀ CHỈ MỤC (INDEXES)"
+      },
+      {
+        "line": 2662,
+        "title": "## 56.1. Cập nhật Schema các bảng cốt lõi trong Revision 9"
+      },
+      {
+        "line": 2764,
+        "title": "## 56.2. Ràng buộc toàn vẹn (Integrity Constraints) và Chỉ mục (Indexes) bắt buộc (`[ACCEPTED]` — P2-06)"
+      },
+      {
+        "line": 2793,
+        "title": "# 57. ĐẶC TẢ GIAO DIỆN API VÀ QUY TẮC XỬ LÝ LỖI / ĐỒNG THỜI"
+      },
+      {
+        "line": 2796,
+        "title": "# 1. Hành khách — Luồng chung & Đặt xe"
+      },
+      {
+        "line": 2807,
+        "title": "# 2. Hành khách — Mở rộng Nội đô & Liên tỉnh"
+      },
+      {
+        "line": 2815,
+        "title": "# 3. Tài xế"
+      },
+      {
+        "line": 2833,
+        "title": "# 4. Quản trị viên (Admin)"
+      },
+      {
+        "line": 2842,
+        "title": "# 5. Đồng bộ Blockchain"
+      },
+      {
+        "line": 2848,
+        "title": "# 58. DANH MỤC SỰ KIỆN HỆ THỐNG (DOMAIN & AUDIT EVENTS)"
+      },
+      {
+        "line": 2851,
+        "title": "# Sự kiện Nội đô & Ghép xe"
+      },
+      {
+        "line": 2863,
+        "title": "# Sự kiện Liên tỉnh"
+      },
+      {
+        "line": 2872,
+        "title": "# Sự kiện Ký quỹ Blockchain"
+      },
+      {
+        "line": 2882,
+        "title": "# 59. KIẾN TRÚC BẢO MẬT, PHÂN QUYỀN VÀ BẢO VỆ DỮ LIỆU CÁ NHÂN (PRIVACY)"
+      },
+      {
+        "line": 2897,
+        "title": "# 60. CƠ CHẾ AN TOÀN CHO HÀNH KHÁCH VÀ TÀI XẾ KHI ĐI GHÉP (SHOULD S9)"
+      },
+      {
+        "line": 2908,
+        "title": "# 61. PHÂN TÍCH RỦI RO PHÁP LÝ TẠI VIỆT NAM VÀ GIẢI PHÁP HỢP ĐỒNG ĐIỆN TỬ ĐỒNG THUÊ CHUYẾN"
+      },
+      {
+        "line": 2912,
+        "title": "## 61.1. Khung pháp lý hiện hành liên quan trực tiếp đến 5 dịch vụ của nền tảng"
+      },
+      {
+        "line": 2923,
+        "title": "## 61.2. Định vị phạm vi đồ án và Giải pháp thiết kế tuân thủ khi chuyển giao thực tế"
+      },
+      {
+        "line": 2933,
+        "title": "# 62. THIẾT KẾ GIAO DIỆN NGƯỜI DÙNG (UI SCREENS & UNIFIED DEMO WORKBENCH)"
+      },
+      {
+        "line": 2937,
+        "title": "## 62.1. Phân hệ Hành khách (`PASSENGER VIEW`)"
+      },
+      {
+        "line": 2946,
+        "title": "## 62.2. Phân hệ Tài xế (`DRIVER VIEW`)"
+      },
+      {
+        "line": 2954,
+        "title": "## 62.3. Phân hệ Quản trị viên (`ADMIN VIEW`)"
+      },
+      {
+        "line": 2962,
+        "title": "# 63. HỆ THỐNG CHỈ SỐ GIÁM SÁT VẬN HÀNH VÀ KỸ THUẬT (OBSERVABILITY METRICS)"
+      },
+      {
+        "line": 2965,
+        "title": "# 1. Chỉ số Kỹ thuật & Độ trễ chung"
+      },
+      {
+        "line": 2975,
+        "title": "# 2. Chỉ số chuyên biệt cho Taxi ghép nội đô (CAR_URBAN_POOL)"
+      },
+      {
+        "line": 2984,
+        "title": "# 3. Chỉ số chuyên biệt cho Liên tỉnh (CAR_INTERCITY_PRIVATE & CAR_INTERCITY_POOL)"
+      },
+      {
+        "line": 2990,
+        "title": "# 4. Chỉ số Đồng bộ Ký quỹ Blockchain"
+      },
+      {
+        "line": 2997,
+        "title": "# PHẦN VIII — CHIẾN LƯỢC DỮ LIỆU, THIẾT KẾ KHẢO SÁT VÀ QUẢN LÝ TẬP HUẤN LUYỆN"
+      },
+      {
+        "line": 2999,
+        "title": "# 64. CHIẾN LƯỢC NGUỒN DỮ LIỆU ĐA TẦNG"
+      },
+      {
+        "line": 3012,
+        "title": "# 65. THIẾT KẾ KHẢO SÁT LỰA CHỌN RỜI RẠC (STATED PREFERENCE SURVEY — S1) VÀ PHÂN TẦNG MẪU"
+      },
+      {
+        "line": 3016,
+        "title": "## 65.1. Quy mô và Phân tầng đối tượng khảo sát (Quota Sampling)"
+      },
+      {
+        "line": 3022,
+        "title": "## 65.2. Cấu trúc bảng hỏi trực quan (Thời gian hoàn thành ~4–5 phút)"
+      },
+      {
+        "line": 3036,
+        "title": "## 65.3. Phương pháp ước lượng tham số và Đánh giá chéo 5-Fold theo người trả lời (`GroupKFold CV`)"
+      },
+      {
+        "line": 3043,
+        "title": "# 66. CẤU TRÚC BẢN GHI HUẤN LUYỆN (TRAINING INSTANCE SCHEMA)"
+      },
+      {
+        "line": 3080,
+        "title": "# 67. QUY TẮC CHIA TẬP DỮ LIỆU THEO THỜI GIAN VÀ CHỐNG RÒ RỈ THÔNG TIN"
+      },
+      {
+        "line": 3102,
+        "title": "# 68. QUY MÔ DỮ LIỆU THEO TỪNG CẤP ĐỘ KIỂM THỬ"
+      },
+      {
+        "line": 3117,
+        "title": "# 69. QUẢN LÝ PHIÊN BẢN VÀ TRUY VẾT DỮ LIỆU – MÔ HÌNH (LINEAGE & REPRODUCIBILITY)"
+      },
+      {
+        "line": 3139,
+        "title": "# PHẦN IX — KẾ HOẠCH KIỂM THỬ, GIẢ THUYẾT NGHIÊN CỨU VÀ DEFINITION OF DONE"
+      },
+      {
+        "line": 3141,
+        "title": "# 70. HỆ THỐNG 18 CỔNG ĐÚNG ĐẮN BẮT BUỘC (`= 0` INVARIANT GATES)"
+      },
+      {
+        "line": 3171,
+        "title": "# 71. ĐẶC TẢ KIỂM THỬ ĐỊNH GIÁ VÀ CÁC BẤT BIẾN TOÁN HỌC (PROPERTY-BASED TESTING SPEC)"
+      },
+      {
+        "line": 3173,
+        "title": "## 71.1. Các ca kiểm thử hồi quy cố định (Fixed Regression Vectors)"
+      },
+      {
+        "line": 3190,
+        "title": "## 71.2. Các bất biến kiểm thử tự động trên dữ liệu sinh ngẫu nhiên (Hypothesis Property-Based Invariants)"
+      },
+      {
+        "line": 3209,
+        "title": "# 72. ĐẶC TẢ KIỂM THỬ LUẬT DỊCH VỤ, THỜI GIAN ĐẶT VÀ VÒNG ĐỜI LIÊN TỈNH"
+      },
+      {
+        "line": 3230,
+        "title": "# 73. ĐẶC TẢ KIỂM THỬ ĐỒNG THỜI, STATE MACHINE VÀ BẢO MẬT"
+      },
+      {
+        "line": 3253,
+        "title": "# 74. HỆ THỐNG GIẢ THUYẾT NGHIÊN CỨU (`H1–H11`) VÀ MA TRẬN ÁNH XẠ ĐÓNG GÓP"
+      },
+      {
+        "line": 3273,
+        "title": "# 75. THIẾT KẾ PHƯƠNG PHÁP ĐÁNH GIÁ THỰC NGHIỆM VÀ KIỂM ĐỊNH THỐNG KÊ"
+      },
+      {
+        "line": 3301,
+        "title": "# 76. HỆ THỐNG CHỈ SỐ ĐÁNH GIÁ TOÀN DIỆN (EVALUATION METRICS)"
+      },
+      {
+        "line": 3312,
+        "title": "# 77. CHỈ TIÊU HIỆU NĂNG HỆ THỐNG (SLA / LATENCY TARGETS)"
+      },
+      {
+        "line": 3330,
+        "title": "# 78. TIÊU CHUẨN HOÀN THÀNH DỰ ÁN (DEFINITION OF DONE — ĐẠT / TỐT / XUẤT SẮC)"
+      },
+      {
+        "line": 3332,
+        "title": "## Mức ĐẠT (Hoàn thành 100% phạm vi MUST — Đủ điều kiện bảo vệ vững chắc)"
+      },
+      {
+        "line": 3350,
+        "title": "## Mức TỐT (Hoàn thành MUST + SHOULD — Hướng tới điểm Giỏi / Xuất sắc)"
+      },
+      {
+        "line": 3356,
+        "title": "## Mức XUẤT SẮC (Hoàn thành thêm các hạng mục COULD)"
+      },
+      {
+        "line": 3361,
+        "title": "# PHẦN X — LỘ TRÌNH TRIỂN KHAI, TÍCH HỢP BLOCKCHAIN ESCROW VÀ QUẢN TRỊ RỦI RO"
+      },
+      {
+        "line": 3363,
+        "title": "# 79. LỘ TRÌNH 12 PHASE THEO PHỤ THUỘC KỸ THUẬT VÀ THỨ TỰ CẮT GIẢM AN TOÀN"
+      },
+      {
+        "line": 3382,
+        "title": "## Thứ tự cắt giảm an toàn nếu gặp áp lực tiến độ (`Graceful Scope Degradation`)"
+      },
+      {
+        "line": 3392,
+        "title": "# 80. THIẾT KẾ KIẾN TRÚC KÝ QUỸ BLOCKCHAIN (ESCROW LIFECYCLE, ĐƠN VỊ TIỀN TỆ, QUỸ ON-CHAIN & XỬ LÝ LỖI)"
+      },
+      {
+        "line": 3396,
+        "title": "## 80.1. Bốn nguyên tắc kiến trúc của lớp Ký quỹ Blockchain (`[ACCEPTED]` — D-33, D-34, D-48, D-49)"
+      },
+      {
+        "line": 3412,
+        "title": "## 80.2. Bảng ánh xạ đầy đủ Vòng đời nghiệp vụ sang Giao dịch Hợp đồng thông minh"
+      },
+      {
+        "line": 3428,
+        "title": "## 80.3. Đặc tả Quỹ bảo đảm nội bộ trên Hợp đồng thông minh (`onChainGuaranteeFundBalance` — `[ACCEPTED]` P1-05)"
+      },
+      {
+        "line": 3435,
+        "title": "## 80.4. Cơ chế Đợi xác nhận, Thử lại (Retry) và Đối soát bất đồng bộ"
+      },
+      {
+        "line": 3442,
+        "title": "# 81. QUY TRÌNH XÁC MINH TÀI XẾ KYC MOCK (SHOULD S7)"
+      },
+      {
+        "line": 3458,
+        "title": "# 82. BẢNG QUẢN TRỊ RỦI RO KỸ THUẬT, NGHIÊN CỨU VÀ VẬN HÀNH"
+      },
+      {
+        "line": 3474,
+        "title": "# 83. TỔNG KẾT THIẾT KẾ REVISION 9"
+      },
+      {
+        "line": 3483,
+        "title": "# 84. HƯỚNG PHÁT TRIỂN SAU ĐỒ ÁN"
+      },
+      {
+        "line": 3492,
+        "title": "# PHỤ LỤC A — DECISION REGISTER CẬP NHẬT (`D-01` ĐẾN `D-52`)"
+      },
+      {
+        "line": 3554,
+        "title": "# PHỤ LỤC B — BẢNG THAM SỐ CẤU HÌNH CHUẨN (YAML SPECIFICATION)"
+      },
+      {
+        "line": 3689,
+        "title": "# PHỤ LỤC C — TỪ ĐIỂN THUẬT NGỮ VÀ KÝ HIỆU TOÁN HỌC"
+      },
+      {
+        "line": 3713,
+        "title": "# PHỤ LỤC D — TÀI LIỆU THAM KHẢO HỌC THUẬT VÀ PHÁP LÝ"
+      },
+      {
+        "line": 3715,
+        "title": "## A. Tài liệu học thuật quốc tế (Optimization, Game Theory & Machine Learning)"
+      },
+      {
+        "line": 3730,
+        "title": "## B. Văn bản quy phạm pháp luật Việt Nam (Tham chiếu tại Mục 61)"
+      },
+      {
+        "line": 3738,
+        "title": "# PHỤ LỤC E — HỒ SƠ PHÂN TÍCH CÁC QUYẾT ĐỊNH MỞ VÀ ĐÁNH ĐỔI THIẾT KẾ (`O-01` ĐẾN `O-08`)"
+      },
+      {
+        "line": 3744,
+        "title": "## O-01: Chọn ngưỡng cận dưới (`Floor_i`) và hàm trọng số trong phân bổ giá ghép nội đô (Mục 15.3 — `D-43`)"
+      },
+      {
+        "line": 3759,
+        "title": "## O-02: Xử lý xung đột giữa Chèn khách động khi xe đang chạy và Giá của hành khách đã qua `pool_lock_point` (Mục 15.5 — `D-44`)"
+      },
+      {
+        "line": 3773,
+        "title": "## O-03: Xử lý Bất biến tốc độ thu nhập theo giờ của tài xế khi ghép (`DriverHourlyRate` — Mục 14.2 & 17 — `D-45a`)"
+      },
+      {
+        "line": 3786,
+        "title": "## O-04: Hệ số phụ trội ghế thứ hai ($\\gamma_{\\text{seat}}$) cho Booking đặt 2 khách trong `CAR_URBAN_POOL` (Mục 12.2 & 15.2 — `D-45b`)"
+      },
+      {
+        "line": 3800,
+        "title": "## O-05: Hạch toán phần lẻ làm tròn xuống `1.000 đ` và Đơn vị cơ sở trên Smart Contract (Mục 17.2 & 80.1 — `D-48, D-51`)"
+      },
+      {
+        "line": 3810,
+        "title": "## O-06: Cổng kiểm tra ký quỹ trước `RIDE_STARTED` và Mô hình ví ở phạm vi MUST (Mục 9.3 & 80.1 — `D-34, D-49`)"
+      },
+      {
+        "line": 3819,
+        "title": "## O-07: Lựa chọn tên đề tài chính thức và Phân tầng mẫu Khảo sát S1 (Mục 0.1 & 65 — `D-30`)"
+      },
+      {
+        "line": 3828,
+        "title": "## O-08: Cho phép hay đóng cứng việc đặt ghế vét trên chuyến ghép liên tỉnh đã `CONFIRMED` trong khoảng `[T−72h, T−24h]` (Mục 2.2 & 27)"
+      }
+    ]
+  },
+  {
+    "file": "mvp_config_baseline_v1.md",
+    "bytes": 37904,
+    "lines": 353,
+    "sha256": "766b08864448d9efd5da6c70fbe8f4ef1622e10ff98ebae15a7a361dad382e66",
+    "headings": [
+      {
+        "line": 1,
+        "title": "# BỘ CẤU HÌNH BASELINE ĐÓNG BĂNG CHO MVP — REVISION 9 (`MVP_CONFIG_BASELINE_V1.md`)"
+      },
+      {
+        "line": 15,
+        "title": "## 1. MỤC ĐÍCH VÀ NGUYÊN TẮC QUẢN TRỊ CẤU HÌNH (`CONFIGURATION GOVERNANCE`)"
+      },
+      {
+        "line": 26,
+        "title": "## 2. TÓM TẮT 4 HIỆU CHỈNH ĐỒNG BỘ ĐÃ KHÓA TRONG CẤU HÌNH (`LOCKED MATHEMATICAL RULES`)"
+      },
+      {
+        "line": 28,
+        "title": "### 2.1. Quy tắc `party_seat_surcharge_gamma` ($\\gamma_{\\text{seat}} = 0.35$), `Quote_i`, `Gap_i`, `Unmatched_i` cho Booking 2 ghế (`D-45b` / `O-04` — `ACCEPTED`)"
+      },
+      {
+        "line": 40,
+        "title": "### 2.2. Điều kiện khả thi cần và đủ của Thuật toán phân bổ hai cận và Xử lý khi vô nghiệm (`D-43` / `O-01` — `ACCEPTED`)"
+      },
+      {
+        "line": 50,
+        "title": "### 2.3. Hệ 6 điều kiện đầy đủ (`D1–D6`) khi chèn khách mới lúc giá cũ đã khóa (`D-44` / `O-02` — `ACCEPTED`)"
+      },
+      {
+        "line": 59,
+        "title": "### 2.4. Đồng bộ cơ sở tính Thu nhập/giờ của tài xế theo Khoản Payout thực tế sau làm tròn (`D-45a` / `D-51` — `ACCEPTED`)"
+      },
+      {
+        "line": 66,
+        "title": "## 3. BẢNG ĐẶC TẢ CHI TIẾT CÁC THAM SỐ BASELINE (`PARAMETER SPECIFICATION TABLES`)"
+      },
+      {
+        "line": 68,
+        "title": "### 3.1. Nhóm Không gian, Vùng phục vụ & Định tuyến (`spatial_and_service_areas`)"
+      },
+      {
+        "line": 76,
+        "title": "### 3.2. Nhóm Dịch vụ Xe máy Nội đô (`bike_urban` — `BIKE_URBAN`)"
+      },
+      {
+        "line": 89,
+        "title": "### 3.3. Nhóm Dịch vụ Taxi Nội đô Bao xe & Ghép (`car_urban` — `CAR_URBAN_PRIVATE` & `CAR_URBAN_POOL`)"
+      },
+      {
+        "line": 119,
+        "title": "### 3.4. Nhóm Dịch vụ Liên tỉnh (`car_intercity_private` & `car_intercity_pool`)"
+      },
+      {
+        "line": 144,
+        "title": "### 3.5. Nhóm Đặt xe, Đồng thời, Ký quỹ Blockchain & Chính sách Phí hủy (`booking_and_concurrency` & `cancellation_policy`)"
+      },
+      {
+        "line": 164,
+        "title": "### 3.6. Nhóm Tối ưu hóa mở rộng, AI/ML & Simulator (`batch_matching`, `meeting_points`, `simulator_and_evaluation`)"
+      },
+      {
+        "line": 180,
+        "title": "## 4. KHỐI CẤU HÌNH YAML CHUẨN ĐÓNG BĂNG (`mvp_config_baseline_v1.yaml`)"
+      },
+      {
+        "line": 320,
+        "title": "## 5. QUY TẮC THAY ĐỔI PHIÊN BẢN VÀ CÔ LẬP SNAPSHOT (`VERSIONING & SNAPSHOT ISOLATION RULES`)"
+      },
+      {
+        "line": 333,
+        "title": "## 6. PHÂN LOẠI 3 NHÓM VẤN ĐỀ CÒN LẠI VÀ KẾT LUẬN TRẠNG THÁI SẴN SÀNG (`READINESS GATE VERDICT`)"
+      },
+      {
+        "line": 335,
+        "title": "### 6.1. Bảng phân loại 3 nhóm vấn đề sau khi Chủ dự án đã phê duyệt cấu hình Baseline v1"
+      },
+      {
+        "line": 347,
+        "title": "### 6.2. Kết luận Trạng thái Sẵn sàng Chính thức (`FINAL READINESS VERDICT`)"
+      }
+    ]
+  },
+  {
+    "file": "revision_9_decision_register.md",
+    "bytes": 18611,
+    "lines": 83,
+    "sha256": "c2b20f041bcaf6fdf9c6f39814c5f915e25556749cfc1693b66102617d541807",
+    "headings": [
+      {
+        "line": 1,
+        "title": "# SỔ ĐĂNG KÝ QUYẾT ĐỊNH THIẾT KẾ — REVISION 9 (`REVISION_9_DECISION_REGISTER.md`)"
+      },
+      {
+        "line": 8,
+        "title": "## Quy ước Nhãn trạng thái Quyết định (Decision Status Taxonomy)"
+      },
+      {
+        "line": 17,
+        "title": "## 1. BẢNG TỔNG HỢP TOÀN BỘ QUYẾT ĐỊNH THIẾT KẾ (`D-01` ĐẾN `D-52`)"
+      },
+      {
+        "line": 19,
+        "title": "### Nhóm I — Các quyết định nền tảng được bảo toàn từ Revision 5–8 (`ACCEPTED`)"
+      },
+      {
+        "line": 58,
+        "title": "### Nhóm II — Các quyết định được sửa đổi, nâng cấp và phê duyệt khóa trong Revision 9 (`D-06`, `D-20`, `D-21`, `D-29`, `D-30`, `D-34`, `D-36`, `D-38..D-40`, `D-43..D-52`)"
+      }
+    ]
+  },
+  {
+    "file": "revision_8_to_revision_9_changelog.md",
+    "bytes": 23421,
+    "lines": 65,
+    "sha256": "f5fb1e56821c568a936db5867ddd8b64052831136eda158f993d15d8a7d77722",
+    "headings": [
+      {
+        "line": 1,
+        "title": "# NHẬT KÝ THAY ĐỔI CHI TIẾT: TỪ REVISION 8 SANG REVISION 9 & KHÓA CẤU HÌNH BASELINE (`REVISION_8_TO_REVISION_9_CHANGELOG.md`)"
+      },
+      {
+        "line": 10,
+        "title": "## 1. XÁC MINH HIỆN TRẠNG CẤU TRÚC CỦA FILE REVISION 8 (MỤC 3.3)"
+      },
+      {
+        "line": 18,
+        "title": "## 2. BẢNG ĐỐI CHIẾU XỬ LÝ TỪNG PHÁT HIỆN P0 VÀ P1 TRONG REVISION 9"
+      },
+      {
+        "line": 42,
+        "title": "## 3. TỔNG HỢP CÁC CẢI TIẾN P2 VÀ P3 ĐÃ TÍCH HỢP VÀO REVISION 9"
+      },
+      {
+        "line": 56,
+        "title": "## 4. NHẬT KÝ HIỆU CHỈNH ĐỒNG BỘ & PHÊ DUYỆT KHÓA CẤU HÌNH BASELINE (`FINAL CONFIGURATION FREEZE — V1`)"
+      }
+    ]
+  }
+]

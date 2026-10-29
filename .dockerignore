@@ -1,0 +1,14 @@
+.venv
+**/node_modules
+**/.next
+.git
+.env
+*.db
+data
+artifacts
+contracts/*
+!contracts/abi/
+web
+tests
+.cache
+.coverage*
